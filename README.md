@@ -2,11 +2,16 @@
 BigBot is a discord selfbot made using python
 
 # Notes:
-You need to have python and discord.py installed to use this
+You need to have python and some modules installed to use this
+
 Get:
 Python 3.7 - 3.7.9
 Discord.py
+httpx
+
+To install python ->>>>> https://www.python.org/downloads/release/python-379/
 To install discord.py, get python, install it, and then type in the command prompt "pip install discord.py"
+To install httpx, get python, install it, and then type in the command prompt "pip install httpx"
 
 # What is this?
 Discord selfbots are kind of like normal discord bots, that
