@@ -1,6 +1,8 @@
 # BigBot
 BigBot is a discord selfbot made using python
 
+This version (one time token access) should make it so you enter your token once into a text file and each time you launch it you don't have to import your token
+
 # Notes:
 You need to have python and some modules installed to use this
 
