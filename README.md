@@ -1,6 +1,13 @@
 # BigBot
 BigBot is a discord selfbot made using python
 
+# Notes:
+You need to have python and discord.py installed to use this
+Get:
+Python 3.7 - 3.7.9
+Discord.py
+To install discord.py, get python, install it, and then type in the command prompt "pip install discord.py"
+
 # What is this?
 Discord selfbots are kind of like normal discord bots, that
 perform actions when given commands, but this does it on
@@ -38,6 +45,8 @@ The prefix is ">"
 >nitrogen "amount" - Generates an amount of random codes to a file and sends it
 
 >status nitrogen - Checks if nitrogen is generating
+
+(Note: For a better more in deptch nitro generator, see my other project: https://github.com/BigweldIndustries/Nitrogen)
 
 # Why is this actually so terrible
 This is an alpha version, of course it is terrible. Heres a tip:
