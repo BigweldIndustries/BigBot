@@ -59,4 +59,4 @@ TOKEN = "PUT YOUR TOKEN IN HERE"
 Just create an issue on this repository
 
 # TODO
-- Fix that bug where you need a second argument in >dnd off
+- have fun
