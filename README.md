@@ -30,9 +30,9 @@ The prefix is ">"
 
 >embed "title" "desc" "footer" - Sends an embed message with those arguments (must be in quotes)
 
->hide "visible text" "hidden ping/invite" - The visible is what the message looks like, the hidden is a ping or invite that will show despite not being an invite link or ping visible to the reader
+>hide "visible text" "hidden ping/invite" - The visible is what the message looks like, the hidden is a ping or invite that will show despite not being an invite link or ping visible to the reader. (Include quotes)
 
->dnd on "default reply to all dms" - Replies to all dm messages with what you tell it to
+>dnd on "default reply to all dms" - Replies to all dm messages with what you tell it to (Include quotes)
 
 >dnd off - Turns off do not disturb
 
@@ -45,6 +45,12 @@ The prefix is ">"
 >nitrogen "amount" - Generates an amount of random codes to a file and sends it
 
 >status nitrogen - Checks if nitrogen is generating
+
+>nitrosnipe on - Turns on a nitrosniper that automatically claims codes sent in servers
+
+>nitrosnipe off - Turns off nitrosnipe
+
+>status nitrosnipe - Checks if nitrosnipe is on
 
 (Note: For a better more in depth nitro generator, see my other project: https://github.com/BigweldIndustries/Nitrogen)
 
