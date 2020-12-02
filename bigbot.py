@@ -163,4 +163,7 @@ async def on_message(message):
     await bot.process_commands(message)
 
 #Run bot
-bot.run(TOKEN, bot=False)
+try:
+    bot.run(TOKEN, bot=False)
+except:
+    print("It appears we could not login, make sure your token does not have quotes around it, and you are connected to the internet")
