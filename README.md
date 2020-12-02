@@ -12,7 +12,9 @@ Discord.py
 httpx
 
 To install python ->>>>> https://www.python.org/downloads/release/python-379/
+
 To install discord.py, get python, install it, and then type in the command prompt "pip install discord.py"
+
 To install httpx, get python, install it, and then type in the command prompt "pip install httpx"
 
 # What is this?
