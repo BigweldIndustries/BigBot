@@ -150,14 +150,8 @@ async def nitrogen(ctx, arg):
     await ctx.send(file=endfile)
     status = "Finished"
     endfile.close()
-    working = False
-    while working == False:
-        try:
-            os.remove("codes.txt")
-            working = True
-            print("Deleted")
-        except:
-            print("Trying to delete...")
+    f = open('codes.txt', 'r+')
+    f.truncate(0)
 
 #On message
 @bot.event
