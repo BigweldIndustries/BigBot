@@ -191,6 +191,7 @@ async def nitrogen(ctx, arg):
     endfile.close()
     f = open('codes.txt', 'r+')
     f.truncate(0)
+    f.close()
 
 #On message
 @bot.event
