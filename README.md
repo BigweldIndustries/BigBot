@@ -15,7 +15,14 @@ use this carefully. I reccomend only showing friends you trust and
 not using this in public servers.
 
 # Why is this actually so terrible
-This is an alpha version, of course it is terrible
+This is an alpha version, of course it is terrible. Heres a tip:
+If you hate entering the token each time, just open the file and change 
+TOKEN = input("something something")
+to
+TOKEN = "PUT YOUR TOKEN IN HERE"
 
 # I need help...
 Just create an issue on this repository
+
+# TODO
+- Fix that bug where you need a second argument in >dnd status and >dnd off
