@@ -66,9 +66,20 @@ async def dnd(ctx, arg1,arg2=""):
         donotdisturb = False
         reply = ""
         await ctx.message.delete()
-    elif arg1 == "status" or arg1 == "Status":
-        await ctx.message.delete()
+
+#Multipurpose status
+@bot.command()
+async def status(ctx, arg):
+    global donotdisturb
+    global status
+    thing = arg
+    await ctx.message.delete()
+    if thing == "dnd":
         statusmsg = await ctx.send(str(donotdisturb))
+        time.sleep(2)
+        await statusmsg.delete()
+    if thing == "nitrogen":
+        statusmsg = await ctx.send(status)
         time.sleep(2)
         await statusmsg.delete()
 
@@ -81,13 +92,13 @@ async def help(ctx):
     print('>help')
     print('>embed "title" "desc" "footer"')
     print('>hide "visible text" "hidden ping/invite"')
-    print('>dnd status')
     print('>dnd on "default reply to all dms"')
     print('>dnd off')
+    print('>status dnd')
     print('>wipe')
     print('>nitro')
     print('>nitrogen "amount"')
-    print('>nitrogenstatus')
+    print('>status nitrogen')
 
 
 #Wipe command
@@ -139,12 +150,6 @@ async def nitrogen(ctx, arg):
             print("Deleted")
         except:
             print("Trying to delete...")
-
-#Nitrogen status command
-@bot.command()
-async def nitrogenstatus(ctx):
-    global status
-    await ctx.send(status)
 
 #On message
 @bot.event
