@@ -17,6 +17,8 @@ not using this in public servers.
 
 # Commands:
 
+The prefix is ">"
+
 >help - Prints commands to the console
 
 >embed "title" "desc" "footer" - Sends an embed message with those arguments (must be in quotes)
