@@ -17,6 +17,14 @@ import random
 print("Imported random")
 import string
 print("Imported string")
+import re
+print("Imported re")
+import httpx
+print("Imported httpx")
+import asyncio
+print("Imported asyncio")
+import json
+print("Imported json")
 import discord
 print("Imported discord")
 from discord.ext import commands
@@ -25,11 +33,25 @@ print("Imported discord.ext stuff")
 print("________________________________________________")
 
 #Set important variables
+
+#Login token
 TOKEN = input("Please input your user token: ")
+
+#Used in hide command
 crazytext = "||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||"
+
+#If dnd is on
 donotdisturb = False
+
+#The dnd message
 reply = ""
+
+#Used in nitrogen
 status = "Finished"
+
+#Nitrosnipe
+nitrosnipestatus = False
+codeRegex = re.compile("(discord.com/gifts/|discordapp.com/gifts/|discord.gift/)([a-zA-Z0-9]+)")
 
 print("Logging in...")
 bot = commands.Bot(command_prefix='>', help_command=None, self_bot=True)
@@ -80,6 +102,7 @@ async def dnd(ctx, arg1,arg2=""):
 async def status(ctx, arg):
     global donotdisturb
     global status
+    global nitrosnipestatus
     thing = arg
     await ctx.message.delete()
     if thing == "dnd":
@@ -90,7 +113,21 @@ async def status(ctx, arg):
         statusmsg = await ctx.send(status)
         time.sleep(2)
         await statusmsg.delete()
+    if thing == "nitrosnipe":
+        statusmsg = await ctx.send(str(nitrosnipestatus))
+        time.sleep(2)
+        await statusmsg.delete()
 
+#Nitrosnipe command
+@bot.command()
+async def nitrosnipe(ctx, arg):
+    global nitrosnipestatus
+    thing = arg
+    await ctx.message.delete()
+    if thing == "on":
+        nitrosnipestatus = True
+    if thing == "off":
+        nitrosnipestatus = False
 
 #Help command
 @bot.command()
@@ -107,6 +144,8 @@ async def help(ctx):
     print('>nitro')
     print('>nitrogen "amount"')
     print('>status nitrogen')
+    print('>nitrosnipe')
+    print('>status nitrosnipe')
 
 
 #Wipe command
@@ -157,6 +196,23 @@ async def nitrogen(ctx, arg):
 @bot.event
 async def on_message(message):
     global donotdisturb
+    global nitrosnipestatus
+    if nitrosnipestatus == True:
+        if codeRegex.search(message.content):
+            code = codeRegex.search(message.content).group(2)
+            start_time = time.time()
+            async with httpx.AsyncClient() as client:
+                result = await client.post(
+                'https://discordapp.com/api/v6/entitlements/gift-codes/' + code + '/redeem',
+                json={'channel_id': str(message.channel.id)},
+                headers={'authorization': TOKEN, 'user-agent': 'Mozilla/5.0'})
+                delay = (time.time() - start_time)
+                if 'This gift has been redeemed already' in str(result.content):
+                    print(f"We found a code but it was redeemed already ({code})")
+                elif 'nitro' in str(result.content):
+                    print(f"We found a code and claimed it! ({code})")
+                elif 'Unknown Gift Code' in str(result.content):
+                    print(f"We found a code but it was invalid ({code})")
     if donotdisturb == True:
         global reply
         if message.author != bot.user:
