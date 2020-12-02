@@ -6,7 +6,9 @@ You need to have python and some modules installed to use this
 
 Get:
 Python 3.7 - 3.7.9
+
 Discord.py
+
 httpx
 
 To install python ->>>>> https://www.python.org/downloads/release/python-379/
