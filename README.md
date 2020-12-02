@@ -17,7 +17,7 @@ not using this in public servers.
 
 # Commands:
 
->help - Prints commands to the console
+>>help - Prints commands to the console
 
 >embed "title" "desc" "footer" - Sends an embed message with those arguments (must be in quotes)
 
