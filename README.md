@@ -46,7 +46,7 @@ The prefix is ">"
 
 >status nitrogen - Checks if nitrogen is generating
 
-(Note: For a better more in deptch nitro generator, see my other project: https://github.com/BigweldIndustries/Nitrogen)
+(Note: For a better more in depth nitro generator, see my other project: https://github.com/BigweldIndustries/Nitrogen)
 
 # Why is this actually so terrible
 This is an alpha version, of course it is terrible. Heres a tip:
