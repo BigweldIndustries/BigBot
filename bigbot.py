@@ -1,6 +1,4 @@
 #Logo
-
-#POLL REQUEST TEST
 print("██████╗ ██╗ ██████╗ ██████╗  ██████╗ ████████╗")
 print("██╔══██╗██║██╔════╝ ██╔══██╗██╔═══██╗╚══██╔══╝")
 print("██████╔╝██║██║  ███╗██████╔╝██║   ██║   ██║   ")
@@ -11,6 +9,8 @@ print("╚═════╝ ╚═╝ ╚═════╝ ╚═════�
 #Import
 print("Importing discord.py and stuff...")
 print("________________________________________________")
+import os
+print("Imported os")
 import time
 print("Imported time")
 import random
@@ -29,6 +29,7 @@ TOKEN = input("Please input your user token: ")
 crazytext = "||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||"
 donotdisturb = False
 reply = ""
+status = "Finished"
 
 print("Logging in...")
 bot = commands.Bot(command_prefix='>', help_command=None, self_bot=True)
@@ -85,6 +86,8 @@ async def help(ctx):
     print('>dnd off')
     print('>wipe')
     print('>nitro')
+    print('>nitrogen "amount"')
+    print('>nitrogenstatus')
 
 
 #Wipe command
@@ -105,6 +108,37 @@ async def nitro(ctx):
     code = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for _ in range(16))
     nitrocode = "https://discord.gift/" + code
     await ctx.send("**Random nitro code:**" + "\n" + nitrocode)
+
+#Nitrogen command
+@bot.command()
+async def nitrogen(ctx, arg):
+    global status
+    amount = int(arg)
+    await ctx.message.delete()
+    nitrocodes = ""
+    for i in range(0,amount):
+        code = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for _ in range(16))
+        nitrocode = "https://discord.gift/" + code + "\n"
+        nitrocodes += nitrocode
+        status = "Generating..."
+    myfile = open("codes.txt","w+")
+    myfile.write("CODES: " + "\n")
+    myfile.close()
+    myfile2=open("codes.txt", "a+")
+    myfile2.write(nitrocodes)
+    myfile2.close
+    endfile=discord.File("codes.txt")
+    await ctx.send(file=endfile)
+    status = "Finished"
+    endfile.close()
+    time.sleep(10)
+    os.remove("codes.txt") 
+
+#Nitrogen status command
+@bot.command()
+async def nitrogenstatus(ctx):
+    global status
+    await ctx.send(status)
 
 #On message
 @bot.event
