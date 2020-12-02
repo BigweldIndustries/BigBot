@@ -38,6 +38,14 @@ bot = commands.Bot(command_prefix='>', help_command=None, self_bot=True)
 @bot.event
 async def on_ready():
     print(f'Logged in as {bot.user}!')
+    clear = input("Now that you are logged in, should we clear the console so you don't accidentally show your token? (y or n): ")
+    if clear == "y":
+        clear = lambda: os.system('cls')
+        clear()
+        print(f"Console cleared, logged in as {bot.user}")
+    else:
+        print("Console not cleared")
+
 
 #Embed command
 @bot.command()
