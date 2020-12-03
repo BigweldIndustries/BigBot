@@ -65,10 +65,7 @@ The prefix is ">"
 
 # Why is this actually so terrible
 This is an alpha version, of course it is terrible. Heres a tip:
-If you hate entering the token each time, just open the file and change 
-TOKEN = input("something something")
-to
-TOKEN = "PUT YOUR TOKEN IN HERE"
+If you hate entering the token each time, download the "one-time-token" branch, and you only enter it once. This is not the main branch for security reasons.
 
 # I need help...
 Just create an issue on this repository
