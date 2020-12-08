@@ -1,7 +1,22 @@
 # BigBot
 BigBot is a discord selfbot made using python
 
-# Notes:
+
+# What is this?
+Discord selfbots are kind of like normal discord bots, that
+perform actions when given commands, but this does it on
+a user account. This can help you do cool stuff like
+send embed messages, send messages that ping people without
+a ping, and other cool stuff.
+
+# Is this safe?
+The software itself is safe, I have all the code on here after all
+for anyone to review. However, selfbots are against discord TOS so
+use this carefully. I reccomend only showing friends you trust and 
+not using this in public servers. If you are wary about the software however,
+simply instead of downloading the release do this:
+
+# Build from scratch:
 You need to have python and some modules installed to use this
 
 Get:
@@ -20,19 +35,6 @@ To install discord.py, get python, install it, and then type in the command prom
 To install httpx, get python, install it, and then type in the command prompt "pip install httpx"
 
 To install colorama, get python, install it, and then type in the command prompt "pip install colorama"
-
-# What is this?
-Discord selfbots are kind of like normal discord bots, that
-perform actions when given commands, but this does it on
-a user account. This can help you do cool stuff like
-send embed messages, send messages that ping people without
-a ping, and other cool stuff.
-
-# Is this safe?
-The software itself is safe, I have all the code on here after all
-for anyone to review. However, selfbots are against discord TOS so
-use this carefully. I reccomend only showing friends you trust and 
-not using this in public servers.
 
 
 # Commands:
