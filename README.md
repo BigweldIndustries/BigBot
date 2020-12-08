@@ -1,3 +1,8 @@
+# Super damn important:
+# This version is an old version and isn't remotely close to the original!
+
+
+
 # BigBot
 BigBot is a discord selfbot made using python
 
