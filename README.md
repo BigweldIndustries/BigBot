@@ -1,6 +1,8 @@
 # BigBot
 BigBot is a discord selfbot made using python
 
+# How to download
+Go to releases and click on the latest one
 
 # What is this?
 Discord selfbots are kind of like normal discord bots, that
