@@ -11,11 +11,15 @@ Discord.py
 
 httpx
 
+colorama
+
 To install python ->>>>> https://www.python.org/downloads/release/python-379/
 
 To install discord.py, get python, install it, and then type in the command prompt "pip install discord.py"
 
 To install httpx, get python, install it, and then type in the command prompt "pip install httpx"
+
+To install colorama, get python, install it, and then type in the command prompt "pip install colorama"
 
 # What is this?
 Discord selfbots are kind of like normal discord bots, that
