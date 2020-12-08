@@ -5,38 +5,40 @@ print("██████╔╝██║██║  ███╗█████�
 print("██╔══██╗██║██║   ██║██╔══██╗██║   ██║   ██║   ")
 print("██████╔╝██║╚██████╔╝██████╔╝╚██████╔╝   ██║   ")
 print("╚═════╝ ╚═╝ ╚═════╝ ╚═════╝  ╚═════╝    ╚═╝   ")
-
+import colorama
+from colorama import init
+from colorama import Fore, Back, Style
+colorama.init()
 #Import
 print("Importing discord.py and stuff...")
 print("________________________________________________")
 import os
-print("Imported os")
+print(Fore.RED+"Imported os")
 import time
-print("Imported time")
+print(Fore.RED+"Imported time")
 import random
-print("Imported random")
+print(Fore.RED+"Imported random")
 import string
-print("Imported string")
+print(Fore.YELLOW+"Imported string")
 import re
-print("Imported re")
+print(Fore.YELLOW+"Imported re")
 import httpx
-print("Imported httpx")
+print(Fore.YELLOW+"Imported httpx")
 import asyncio
-print("Imported asyncio")
+print(Fore.GREEN+"Imported asyncio")
 import json
-print("Imported json")
+print(Fore.GREEN+"Imported json")
 import discord
-print("Imported discord")
+print(Fore.GREEN+"Imported discord")
 from discord.ext import commands
 from discord.ext.commands import Bot
-print("Imported discord.ext stuff")
-print("________________________________________________")
+print(Fore.GREEN+"Imported discord.ext stuff")
+print(Style.RESET_ALL+"________________________________________________")
 
 #Set important variables
 
 #Login token
 TOKEN = input("Please input your user token: ")
-
 #Used in hide command
 crazytext = "||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||"
 
@@ -53,20 +55,21 @@ status = "Finished"
 nitrosnipestatus = False
 codeRegex = re.compile("(discord.com/gifts/|discordapp.com/gifts/|discord.gift/)([a-zA-Z0-9]+)")
 
-print("Logging in...")
+print(Fore.YELLOW+"Logging in...")
 bot = commands.Bot(command_prefix='>', help_command=None, self_bot=True)
 
 #Print when bot is  logged in
 @bot.event
 async def on_ready():
-    print(f'Logged in as {bot.user}!')
+    print(Fore.GREEN+f'Logged in as {bot.user}!')
+    print(Style.RESET_ALL)
     clear = input("Now that you are logged in, should we clear the console so you don't accidentally show your token? (y or n): ")
     if clear == "y":
         clear = lambda: os.system('cls')
         clear()
-        print(f"Console cleared, logged in as {bot.user}")
+        print(Fore.GREEN+f"Console cleared, logged in as {bot.user}")
     else:
-        print("Console not cleared")
+        print(Fore.YELLOW+"Console not cleared")
 
 
 #Embed command
@@ -133,7 +136,8 @@ async def nitrosnipe(ctx, arg):
 @bot.command()
 async def help(ctx):
     await ctx.message.delete()
-    print("Bigbot commands:")
+    print(Fore.GREEN+"Bigbot commands:")
+    print(Style.RESET_ALL)
     print('>help')
     print('>embed "title" "desc" "footer"')
     print('>hide "visible text" "hidden ping/invite"')
@@ -152,12 +156,12 @@ async def help(ctx):
 @bot.command()
 async def wipe(ctx):
     await ctx.message.delete()
-    wipeinput = input("Are you sure you want to destroy every channel in this server? (WARNING: This happens really fast so it will probably flag your account)(y or n): ")
+    wipeinput = input(Fore.RED+"Are you sure you want to destroy every channel in this server? (WARNING: This happens really fast so it will probably flag your account)(y or n): ")
     if wipeinput == "y" or wipeinput == "Y":
         guild = ctx.guild
         for channel in guild.channels:
             await channel.delete()
-        print("Wiped")
+        print(Fore.GREEN+"Wiped")
 
 #Nitro command
 @bot.command()
@@ -209,11 +213,11 @@ async def on_message(message):
                 headers={'authorization': TOKEN, 'user-agent': 'Mozilla/5.0'})
                 delay = (time.time() - start_time)
                 if 'This gift has been redeemed already' in str(result.content):
-                    print(f"We found a code but it was redeemed already ({code})")
+                    print(Fore.YELLOW+f"We found a code but it was redeemed already ({code})")
                 elif 'nitro' in str(result.content):
-                    print(f"We found a code and claimed it! ({code})")
+                    print(Fore.GREEN+f"We found a code and claimed it! ({code})")
                 elif 'Unknown Gift Code' in str(result.content):
-                    print(f"We found a code but it was invalid ({code})")
+                    print(Fore.RED+f"We found a code but it was invalid ({code})")
     if donotdisturb == True:
         global reply
         if message.author != bot.user:
@@ -225,4 +229,8 @@ async def on_message(message):
 try:
     bot.run(TOKEN, bot=False)
 except:
+    print(Style.RESET_ALL)
     print("It appears we could not login, make sure your token does not have quotes around it, and you are connected to the internet")
+    finalpass = input("Press enter to close...")
+    if finalpass=="":
+        sys.exit()
