@@ -45,7 +45,7 @@ The prefix is ">"
 
 >help - Prints commands to the console
 
->embed "title" "desc" "footer" - Sends an embed message with those arguments (must be in quotes)
+>embed color "title" "desc" "footer" - Sends an embed message with those arguments (must be in quotes), Colors are red, orange, yellow, green, blue, purple, black, none
 
 >hide "visible text" "hidden ping/invite" - The visible is what the message looks like, the hidden is a ping or invite that will show despite not being an invite link or ping visible to the reader. (Include quotes)
 
@@ -69,6 +69,8 @@ The prefix is ">"
 
 >status nitrosnipe - Checks if nitrosnipe is on
 
+>coolorcringe - Randomly picks from either "cool" or "cringe"
+
 (Note: For a better more in depth nitro generator, see my other project: https://github.com/BigweldIndustries/Nitrogen)
 
 # Why is this actually so terrible
@@ -79,5 +81,5 @@ If you hate entering the token each time, download the "one-time-token" branch, 
 Just create an issue on this repository
 
 # TODO
-- custom colors for embed command (:
+- update release
 - yt command that sends yt video from search terms

@@ -160,10 +160,10 @@ async def nitrosnipe(ctx, arg):
 @bot.command()
 async def help(ctx):
     await ctx.message.delete()
-    print(Fore.GREEN+"Bigbot commands:")
-    print(Style.RESET_ALL)
+    print("")
+    print(Fore.GREEN+"Bigbot commands:"+Style.RESET_ALL)
     print('>help')
-    print('>embed color "title" "desc" "footer"    (Colors are red, orange, yellow, green, blue, purple, black, none')
+    print('>embed color "title" "desc" "footer"    (Colors are red, orange, yellow, green, blue, purple, black, none)')
     print('>hide "visible text" "hidden ping/invite"')
     print('>dnd on "default reply to all dms"')
     print('>dnd off')
@@ -174,7 +174,15 @@ async def help(ctx):
     print('>status nitrogen')
     print('>nitrosnipe')
     print('>status nitrosnipe')
+    print('>coolorcringe')
 
+#Cool or Cringe command
+@bot.command()
+async def coolorcringe(ctx):
+    await ctx.message.delete()
+    coolorcringelist = ["cool", "cringe"]
+    result = random.choice(coolorcringelist)
+    await ctx.send(result)
 
 #Wipe command
 @bot.command()
