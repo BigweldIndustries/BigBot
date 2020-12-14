@@ -81,9 +81,5 @@ If you hate entering the token each time, download the "one-time-token" branch, 
 Just create an issue on this repository
 
 # TODO
-<<<<<<< HEAD
 - update release
-=======
-- Ipdate releases
->>>>>>> 47f8229cc84edfaa357a515b81dfbfbe0c9824a3
 - yt command that sends yt video from search terms
