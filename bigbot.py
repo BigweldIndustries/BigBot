@@ -1,4 +1,4 @@
-#testing testing 123
+#ok if i finally got this working this should show up
 
 #Logo
 print("██████╗ ██╗ ██████╗ ██████╗  ██████╗ ████████╗")
