@@ -1,7 +1,7 @@
 # BigBot
 BigBot is a discord selfbot made using python
 
-# How to download
+# How to download/setup
 Go to releases and click on the latest one. To get your user token, just look up "get discord token"
 
 # What is this?
