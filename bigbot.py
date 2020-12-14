@@ -1,5 +1,3 @@
-#ok if i finally got this working this should show up
-
 #Logo
 print("██████╗ ██╗ ██████╗ ██████╗  ██████╗ ████████╗")
 print("██╔══██╗██║██╔════╝ ██╔══██╗██╔═══██╗╚══██╔══╝")
@@ -31,6 +29,7 @@ print(Fore.GREEN+"Imported asyncio")
 import json
 print(Fore.GREEN+"Imported json")
 import discord
+from discord import Color
 print(Fore.GREEN+"Imported discord")
 from discord.ext import commands
 from discord.ext.commands import Bot
@@ -41,6 +40,7 @@ print(Style.RESET_ALL+"________________________________________________")
 
 #Login token
 TOKEN = input("Please input your user token: ")
+
 #Used in hide command
 crazytext = "||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||"
 
@@ -76,11 +76,33 @@ async def on_ready():
 
 #Embed command
 @bot.command()
-async def embed(ctx, arg1, arg2, arg3):
-    embed=discord.Embed(title=arg1, description=arg2, color=0x002dff)
-    embed.set_footer(text=arg3)
-    await ctx.send(embed=embed)
-    await ctx.message.delete()
+async def embed(ctx, col, arg1, arg2, arg3):
+    if col == "red":
+        embedcolor = Color.red()
+    if col == "orange":
+        embedcolor = Color.orange()
+    if col == "yellow":
+        embedcolor = Color.yellow()
+    if col == "green":
+        embedcolor = Color.green()
+    if col == "blue":
+        embedcolor = Color.blue()
+    if col == "purple":
+        embedcolor = Color.purple()
+    if col == "black":
+        embedcolor = Color.black()
+    if col == "none":
+        embedcolor = "none"
+    if embedcolor == "none":
+        embed=discord.Embed(title=arg1, description=arg2)
+        embed.set_footer(text=arg3)
+        await ctx.send(embed=embed)
+        await ctx.message.delete()
+    if embedcolor != "none":
+        embed=discord.Embed(title=arg1, description=arg2, color=embedcolor)
+        embed.set_footer(text=arg3)
+        await ctx.send(embed=embed)
+        await ctx.message.delete()
 
 #Hide command
 @bot.command()
@@ -141,7 +163,7 @@ async def help(ctx):
     print(Fore.GREEN+"Bigbot commands:")
     print(Style.RESET_ALL)
     print('>help')
-    print('>embed "title" "desc" "footer"')
+    print('>embed color "title" "desc" "footer"    (Colors are red, orange, yellow, green, blue, purple, black, none')
     print('>hide "visible text" "hidden ping/invite"')
     print('>dnd on "default reply to all dms"')
     print('>dnd off')
