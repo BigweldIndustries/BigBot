@@ -79,5 +79,5 @@ If you hate entering the token each time, download the "one-time-token" branch, 
 Just create an issue on this repository
 
 # TODO
-- custom colors for embed command (:
+- Ipdate releases
 - yt command that sends yt video from search terms
