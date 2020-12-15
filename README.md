@@ -1,4 +1,6 @@
 # This version is just a py file and there isn't an exe release
+# It is also typically a few updates behind
+# Currently V. 1.2, check version on main branch to see how far behind this is
 
 # BigBot
 BigBot is a discord selfbot made using python. It can send invisible pings, autoclaim nitro, send yt videos just from titles and more. Can be set up with no experience nearly instantly
