@@ -273,11 +273,11 @@ async def on_message(message):
                 headers={'authorization': TOKEN, 'user-agent': 'Mozilla/5.0'})
                 delay = (time.time() - start_time)
                 if 'This gift has been redeemed already' in str(result.content):
-                    print(Fore.YELLOW+f"We found a code but it was redeemed already ({code})")
+                    print(Fore.YELLOW+f"We found a code but it was redeemed already ({code}, delay of {delay})")
                 elif 'nitro' in str(result.content):
-                    print(Fore.GREEN+f"We found a code and claimed it! ({code})")
+                    print(Fore.GREEN+f"We found a code and claimed it! ({code}, delay of {delay})")
                 elif 'Unknown Gift Code' in str(result.content):
-                    print(Fore.RED+f"We found a code but it was invalid ({code})")
+                    print(Fore.RED+f"We found a code but it was invalid ({code}, delay of {delay})")
     if donotdisturb == True:
         global reply
         if message.author != bot.user:
