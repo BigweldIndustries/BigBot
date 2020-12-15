@@ -29,7 +29,7 @@ print(Fore.GREEN+"Imported asyncio")
 import json
 print(Fore.GREEN+"Imported json")
 from searchtube import Search
-printFore.GREEN+("Imported yt search")
+print(Fore.GREEN+"Imported yt search")
 import discord
 from discord import Color
 print(Fore.GREEN+"Imported discord")
