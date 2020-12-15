@@ -55,7 +55,7 @@ The prefix is ">"
 
 >status dnd - Checks if do not disturb is on
 
->yt "video name" - Sends the first result for those youtube search terms in chat
+>yt "video name" - Sends the first result for those youtube search terms in chat (Known error, working on fix)
 
 >wipe - Deletes all channels (Requires confirmation in the console)
 
