@@ -14,6 +14,8 @@ print("Importing discord.py and stuff...")
 print("________________________________________________")
 import os
 print(Fore.RED+"Imported os")
+import sys
+print(Fore.RED+"Imported sys")
 import time
 print(Fore.RED+"Imported time")
 import random
@@ -28,6 +30,8 @@ import asyncio
 print(Fore.YELLOW+"Imported asyncio")
 import json
 print(Fore.GREEN+"Imported json")
+import csv
+print(Fore.GREEN+"Imported csv")
 from googleapiclient.discovery import build
 print(Fore.GREEN+"Imported YT Api")
 import discord
@@ -39,9 +43,19 @@ print(Fore.GREEN+"Imported discord.ext stuff")
 print(Style.RESET_ALL+"________________________________________________")
 
 #Set important variables
-
+commanddict = {}
+try:
+    reader = csv.reader(open('commands.csv', 'r'))
+    for row in reader:
+        if row != "":
+            k, v = row
+            commanddict[k] = v
+    print(Fore.GREEN+"Custom commands loaded!"+Style.RESET_ALL)
+except:
+    pass
 #Login token
 TOKEN = input("Please input your user token: ")
+
 
 #Used in hide command
 crazytext = "||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||"
@@ -87,6 +101,17 @@ async def on_ready():
     else:
         print(Fore.YELLOW+"Console not cleared")
 
+@bot.command()
+async def add(ctx, arg1, arg2):
+    global commanddict
+    name = arg1
+    returns = arg2
+    await ctx.message.delete()
+    commanddict[arg1] = arg2
+    print(Fore.GREEN + f'Command "{name}" added!' + Style.RESET_ALL)
+    with open('commands.csv', 'w') as f:
+        for key in commanddict.keys():
+            f.write("%s,%s\n"%(key,commanddict[key]))
 
 #Embed command
 @bot.command()
@@ -190,6 +215,7 @@ async def help(ctx):
     print("")
     print(Fore.GREEN+"Bigbot commands:"+Style.RESET_ALL)
     print('>help')
+    print('>add "command name" "command message"')
     print('>embed color "title" "desc" "footer"    (Colors are red, orange, yellow, green, blue, purple, black, none)')
     print('>hide "visible text" "hidden ping/invite"')
     print('>dnd on "default reply to all dms"')
@@ -262,6 +288,7 @@ async def nitrogen(ctx, arg):
 async def on_message(message):
     global donotdisturb
     global nitrosnipestatus
+    global commanddict
     if nitrosnipestatus == True:
         if codeRegex.search(message.content):
             code = codeRegex.search(message.content).group(2)
@@ -278,6 +305,10 @@ async def on_message(message):
                     print(Fore.GREEN+f"We found a code and claimed it! ({code}, delay of {delay})")
                 elif 'Unknown Gift Code' in str(result.content):
                     print(Fore.RED+f"We found a code but it was invalid ({code}, delay of {delay})")
+    for key in commanddict:
+        if message.content == key:
+            await message.delete()
+            await message.channel.send(commanddict[key])
     if donotdisturb == True:
         global reply
         if message.author != bot.user:
@@ -290,7 +321,8 @@ try:
     bot.run(TOKEN, bot=False)
 except:
     print(Style.RESET_ALL)
-    print("It appears we could not login, make sure your token does not have quotes around it, and you are connected to the internet")
+    print("It appears we could not login...")
+    print("Make sure your token does not have quotes around it, and you are connected to the internet")
     finalpass = input("Press enter to close...")
     if finalpass=="":
         sys.exit()

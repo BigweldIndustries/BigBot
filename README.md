@@ -47,6 +47,8 @@ The prefix is ">"
 
 >help - Prints commands to the console
 
+>add "command name" "command message" - Add your own command that sends a custom message when you call it! (This will store in a csv file which can be used next time you launch)
+
 >embed color "title" "desc" "footer" - Sends an embed message with those arguments (must be in quotes), Colors are red, orange, yellow, green, blue, purple, black, none
 
 >hide "visible text" "hidden ping/invite" - The visible is what the message looks like, the hidden is a ping or invite that will show despite not being an invite link or ping visible to the reader. (Include quotes)
