@@ -5,32 +5,38 @@ print("██████╔╝██║██║  ███╗█████�
 print("██╔══██╗██║██║   ██║██╔══██╗██║   ██║   ██║   ")
 print("██████╔╝██║╚██████╔╝██████╔╝╚██████╔╝   ██║   ")
 print("╚═════╝ ╚═╝ ╚═════╝ ╚═════╝  ╚═════╝    ╚═╝   ")
-
+import colorama
+from colorama import init
+from colorama import Fore, Back, Style
+colorama.init()
 #Import
 print("Importing discord.py and stuff...")
 print("________________________________________________")
 import os
-print("Imported os")
+print(Fore.RED+"Imported os")
 import time
-print("Imported time")
+print(Fore.RED+"Imported time")
 import random
-print("Imported random")
+print(Fore.RED+"Imported random")
 import string
-print("Imported string")
+print(Fore.YELLOW+"Imported string")
 import re
-print("Imported re")
+print(Fore.YELLOW+"Imported re")
 import httpx
-print("Imported httpx")
+print(Fore.YELLOW+"Imported httpx")
 import asyncio
-print("Imported asyncio")
+print(Fore.YELLOW+"Imported asyncio")
 import json
-print("Imported json")
+print(Fore.GREEN+"Imported json")
+from googleapiclient.discovery import build
+print(Fore.GREEN+"Imported YT Api")
 import discord
-print("Imported discord")
+from discord import Color
+print(Fore.GREEN+"Imported discord")
 from discord.ext import commands
 from discord.ext.commands import Bot
-print("Imported discord.ext stuff")
-print("________________________________________________")
+print(Fore.GREEN+"Imported discord.ext stuff")
+print(Style.RESET_ALL+"________________________________________________")
 
 #Set important variables
 
@@ -54,27 +60,77 @@ status = "Finished"
 nitrosnipestatus = False
 codeRegex = re.compile("(discord.com/gifts/|discordapp.com/gifts/|discord.gift/)([a-zA-Z0-9]+)")
 
-print("Logging in...")
+print(Fore.YELLOW+"Logging in...")
 bot = commands.Bot(command_prefix='>', help_command=None, self_bot=True)
+
+def get_service():
+    # I really don't care if you copy this youtube api key, they are free and plentiful
+    return build("youtube", "v3", developerKey="AIzaSyBdM3Fe3Cae59NtUrGeeFBBPbywGA2RfRw")
+
+def search(term):
+    service = get_service()
+    resp = service.search().list(
+        part="id",
+        q=term,
+    ).execute()
+    return resp["items"][0]["id"]["videoId"]
 
 #Print when bot is  logged in
 @bot.event
 async def on_ready():
-    print(f'Logged in as {bot.user}!')
+    print(Fore.GREEN+f'Logged in as {bot.user}!')
+    print(Style.RESET_ALL)
+    clear = input("Now that you are logged in, should we clear the console so you don't accidentally show your token? (y or n): ")
+    if clear == "y":
+        clear = lambda: os.system('cls')
+        clear()
+        print(Fore.GREEN+f"Console cleared, logged in as {bot.user}")
+    else:
+        print(Fore.YELLOW+"Console not cleared")
+
 
 #Embed command
 @bot.command()
-async def embed(ctx, arg1, arg2, arg3):
-    embed=discord.Embed(title=arg1, description=arg2, color=0x002dff)
-    embed.set_footer(text=arg3)
-    await ctx.send(embed=embed)
-    await ctx.message.delete()
+async def embed(ctx, col, arg1, arg2, arg3):
+    if col == "red":
+        embedcolor = Color.red()
+    if col == "orange":
+        embedcolor = Color.orange()
+    if col == "yellow":
+        embedcolor = Color.yellow()
+    if col == "green":
+        embedcolor = Color.green()
+    if col == "blue":
+        embedcolor = Color.blue()
+    if col == "purple":
+        embedcolor = Color.purple()
+    if col == "black":
+        embedcolor = Color.black()
+    if col == "none":
+        embedcolor = "none"
+    if embedcolor == "none":
+        embed=discord.Embed(title=arg1, description=arg2)
+        embed.set_footer(text=arg3)
+        await ctx.send(embed=embed)
+        await ctx.message.delete()
+    if embedcolor != "none":
+        embed=discord.Embed(title=arg1, description=arg2, color=embedcolor)
+        embed.set_footer(text=arg3)
+        await ctx.send(embed=embed)
+        await ctx.message.delete()
 
 #Hide command
 @bot.command()
 async def hide(ctx, arg1, arg2):
     await ctx.send(arg1+crazytext+arg2)
     await ctx.message.delete()
+
+#YT Search command
+@bot.command()
+async def yt(ctx, arg1):
+    vid = arg1
+    await ctx.message.delete()
+    await ctx.send("https://youtube.com/watch?v="+search(vid))
 
 #Do not disturb
 @bot.command()
@@ -89,6 +145,12 @@ async def dnd(ctx, arg1,arg2=""):
         donotdisturb = False
         reply = ""
         await ctx.message.delete()
+
+#secret command
+@bot.command()
+async def beatthesoapinhishand(ctx):
+    await ctx.message.delete()
+    await ctx.send("https://www.youtube.com/watch?v=bJMXliokGrY")
 
 #Multipurpose status
 @bot.command()
@@ -126,31 +188,41 @@ async def nitrosnipe(ctx, arg):
 @bot.command()
 async def help(ctx):
     await ctx.message.delete()
-    print("Bigbot commands:")
+    print("")
+    print(Fore.GREEN+"Bigbot commands:"+Style.RESET_ALL)
     print('>help')
-    print('>embed "title" "desc" "footer"')
+    print('>embed color "title" "desc" "footer"    (Colors are red, orange, yellow, green, blue, purple, black, none)')
     print('>hide "visible text" "hidden ping/invite"')
     print('>dnd on "default reply to all dms"')
     print('>dnd off')
     print('>status dnd')
+    print('>yt "video name"')
     print('>wipe')
     print('>nitro')
     print('>nitrogen "amount"')
     print('>status nitrogen')
     print('>nitrosnipe')
     print('>status nitrosnipe')
+    print('>coolorcringe')
 
+#Cool or Cringe command
+@bot.command()
+async def coolorcringe(ctx):
+    await ctx.message.delete()
+    coolorcringelist = ["cool", "cringe"]
+    result = random.choice(coolorcringelist)
+    await ctx.send(result)
 
 #Wipe command
 @bot.command()
 async def wipe(ctx):
     await ctx.message.delete()
-    wipeinput = input("Are you sure you want to destroy every channel in this server? (WARNING: This happens really fast so it will probably flag your account)(y or n): ")
+    wipeinput = input(Fore.RED+"Are you sure you want to destroy every channel in this server? (WARNING: This happens really fast so it will probably flag your account)(y or n): ")
     if wipeinput == "y" or wipeinput == "Y":
         guild = ctx.guild
         for channel in guild.channels:
             await channel.delete()
-        print("Wiped")
+        print(Fore.GREEN+"Wiped")
 
 #Nitro command
 @bot.command()
@@ -202,11 +274,11 @@ async def on_message(message):
                 headers={'authorization': TOKEN, 'user-agent': 'Mozilla/5.0'})
                 delay = (time.time() - start_time)
                 if 'This gift has been redeemed already' in str(result.content):
-                    print(f"We found a code but it was redeemed already ({code})")
+                    print(Fore.YELLOW+f"We found a code but it was redeemed already ({code}, delay of {delay})")
                 elif 'nitro' in str(result.content):
-                    print(f"We found a code and claimed it! ({code})")
+                    print(Fore.GREEN+f"We found a code and claimed it! ({code}, delay of {delay})")
                 elif 'Unknown Gift Code' in str(result.content):
-                    print(f"We found a code but it was invalid ({code})")
+                    print(Fore.RED+f"We found a code but it was invalid ({code}, delay of {delay})")
     if donotdisturb == True:
         global reply
         if message.author != bot.user:
@@ -218,4 +290,8 @@ async def on_message(message):
 try:
     bot.run(TOKEN, bot=False)
 except:
+    print(Style.RESET_ALL)
     print("It appears we could not login, make sure your token does not have quotes around it, and you are connected to the internet")
+    finalpass = input("Press enter to close...")
+    if finalpass=="":
+        sys.exit()
