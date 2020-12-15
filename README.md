@@ -1,8 +1,10 @@
 # BigBot
-BigBot is a discord selfbot made using python
+BigBot is a discord selfbot made using python. It can send invisible pings, autoclaim nitro, send yt videos just from titles and more. Can be set up with no experience nearly instantly 
 
 # How to download/setup
 Go to releases and click on the latest one. To get your user token, just look up "get discord token"
+Typically though, the exe build may be just a bit behind the python file, so scroll down if you are
+experienced enough to mess with that.
 
 # What is this?
 Discord selfbots are kind of like normal discord bots, that
