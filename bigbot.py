@@ -145,6 +145,12 @@ async def dnd(ctx, arg1,arg2=""):
         reply = ""
         await ctx.message.delete()
 
+#secret command
+@bot.command()
+async def beatthesoapinhishand(ctx):
+    await ctx.message.delete()
+    await ctx.send("https://www.youtube.com/watch?v=bJMXliokGrY")
+
 #Multipurpose status
 @bot.command()
 async def status(ctx, arg):
