@@ -43,6 +43,8 @@ print(Fore.GREEN+"Imported discord.ext stuff")
 print(Style.RESET_ALL+"________________________________________________")
 
 #Set important variables
+
+#Initializes custom commands
 commanddict = {}
 try:
     reader = csv.reader(open('commands.csv', 'r'))
@@ -53,6 +55,7 @@ try:
     print(Fore.GREEN+"Custom commands loaded!"+Style.RESET_ALL)
 except:
     pass
+
 #Login token
 TOKEN = input("Please input your user token: ")
 
@@ -101,6 +104,7 @@ async def on_ready():
     else:
         print(Fore.YELLOW+"Console not cleared")
 
+#Add command
 @bot.command()
 async def add(ctx, arg1, arg2):
     global commanddict
@@ -211,6 +215,7 @@ async def nitrosnipe(ctx, arg):
 #Help command
 @bot.command()
 async def help(ctx):
+    global commanddict
     await ctx.message.delete()
     print("")
     print(Fore.GREEN+"Bigbot commands:"+Style.RESET_ALL)
@@ -229,7 +234,10 @@ async def help(ctx):
     print('>nitrosnipe')
     print('>status nitrosnipe')
     print('>coolorcringe')
-
+    print("")
+    print(Fore.GREEN+"Custom commands:"+Style.RESET_ALL)
+    for key in commanddict:
+        print(key + " - " + commanddict[key])
 #Cool or Cringe command
 @bot.command()
 async def coolorcringe(ctx):
