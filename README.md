@@ -84,3 +84,4 @@ Just create an issue on this repository
 
 # TODO
 - update releases when big update comes out
+- known bug on yt search, you can only search one word currently
