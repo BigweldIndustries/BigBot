@@ -28,6 +28,8 @@ import asyncio
 print(Fore.GREEN+"Imported asyncio")
 import json
 print(Fore.GREEN+"Imported json")
+from searchtube import Search
+printFore.GREEN+("Imported yt search")
 import discord
 from discord import Color
 print(Fore.GREEN+"Imported discord")
@@ -110,6 +112,15 @@ async def hide(ctx, arg1, arg2):
     await ctx.send(arg1+crazytext+arg2)
     await ctx.message.delete()
 
+#YT Search command
+@bot.command()
+async def yt(ctx, arg1):
+    vid = arg1
+    await ctx.message.delete()
+    results = Search(vid, count=1).results
+    final = results[0].get("video_id")
+    await ctx.send("https://youtube.com/watch?v="+final)
+
 #Do not disturb
 @bot.command()
 async def dnd(ctx, arg1,arg2=""):
@@ -168,6 +179,7 @@ async def help(ctx):
     print('>dnd on "default reply to all dms"')
     print('>dnd off')
     print('>status dnd')
+    print('>yt "video name"')
     print('>wipe')
     print('>nitro')
     print('>nitrogen "amount"')
