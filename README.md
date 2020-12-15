@@ -8,11 +8,6 @@ This version (one time token access) should make it so you enter your token once
 
 Set your token by typing it into token.txt with nothing else. Make sure it doesn't have quotes around it!
 
-# How to download/setup
-Go to releases and click on the latest one. To get your user token, just look up "get discord token"
-Typically though, the exe build may be just a bit behind the python file, so scroll down if you are
-experienced enough to mess with that.
-
 # What is this?
 Discord selfbots are kind of like normal discord bots, that
 perform actions when given commands, but this does it on
@@ -27,7 +22,7 @@ use this carefully. I reccomend only showing friends you trust and
 not using this in public servers. If you are wary about the software however,
 simply instead of downloading the release do this:
 
-# Build from scratch:
+# Setup:
 You need to have python and some modules installed to use this
 
 Get:
@@ -84,12 +79,8 @@ The prefix is ">"
 
 (Note: For a better more in depth nitro generator, see my other project: https://github.com/BigweldIndustries/Nitrogen)
 
-# Why is this actually so terrible
-This is an alpha version, of course it is terrible. Heres a tip:
-If you hate entering the token each time, download the "one-time-token" branch, and you only enter it once. This is not the main branch for security reasons.
-
 # I need help...
 Just create an issue on this repository
 
 # TODO
-- update releases when big update comes out
+- update when big update comes out
