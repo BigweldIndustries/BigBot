@@ -32,6 +32,9 @@ httpx
 
 colorama
 
+google-api-python-client
+
+
 To install python ->>>>> https://www.python.org/downloads/release/python-379/
 
 To install discord.py, get python, install it, and then type in the command prompt "pip install discord.py"
@@ -39,6 +42,8 @@ To install discord.py, get python, install it, and then type in the command prom
 To install httpx, get python, install it, and then type in the command prompt "pip install httpx"
 
 To install colorama, get python, install it, and then type in the command prompt "pip install colorama"
+
+To install google-api-python-client, get python, install it, and then type in the command prompt "pip3 install google-api-python-client"
 
 
 # Commands:
