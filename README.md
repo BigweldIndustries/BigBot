@@ -55,7 +55,7 @@ The prefix is ">"
 
 >status dnd - Checks if do not disturb is on
 
->yt "video name" - Sends the first result for those youtube search terms in chat (Known error, working on fix)
+>yt "video name" - Sends the first result for those youtube search terms in chat
 
 >wipe - Deletes all channels (Requires confirmation in the console)
 
@@ -84,4 +84,3 @@ Just create an issue on this repository
 
 # TODO
 - update releases when big update comes out
-- known bug on yt search, you can only search one word currently

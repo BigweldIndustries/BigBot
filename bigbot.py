@@ -25,11 +25,11 @@ print(Fore.YELLOW+"Imported re")
 import httpx
 print(Fore.YELLOW+"Imported httpx")
 import asyncio
-print(Fore.GREEN+"Imported asyncio")
+print(Fore.YELLOW+"Imported asyncio")
 import json
 print(Fore.GREEN+"Imported json")
-from searchtube import Search
-print(Fore.GREEN+"Imported yt search")
+from googleapiclient.discovery import build
+print(Fore.GREEN+"Imported YT Api")
 import discord
 from discord import Color
 print(Fore.GREEN+"Imported discord")
@@ -61,6 +61,18 @@ codeRegex = re.compile("(discord.com/gifts/|discordapp.com/gifts/|discord.gift/)
 
 print(Fore.YELLOW+"Logging in...")
 bot = commands.Bot(command_prefix='>', help_command=None, self_bot=True)
+
+def get_service():
+    # I really don't care if you copy this youtube api key, they are free and plentiful
+    return build("youtube", "v3", developerKey="AIzaSyBdM3Fe3Cae59NtUrGeeFBBPbywGA2RfRw")
+
+def search(term):
+    service = get_service()
+    resp = service.search().list(
+        part="id",
+        q=term,
+    ).execute()
+    return resp["items"][0]["id"]["videoId"]
 
 #Print when bot is  logged in
 @bot.event
@@ -117,9 +129,7 @@ async def hide(ctx, arg1, arg2):
 async def yt(ctx, arg1):
     vid = arg1
     await ctx.message.delete()
-    results = Search(vid, count=1).results
-    final = results[0].get("video_id")
-    await ctx.send("https://youtube.com/watch?v="+final)
+    await ctx.send("https://youtube.com/watch?v="+search(vid))
 
 #Do not disturb
 @bot.command()
