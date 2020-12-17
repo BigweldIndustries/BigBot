@@ -32,8 +32,8 @@ import json
 print(Fore.GREEN+"Imported json")
 import csv
 print(Fore.GREEN+"Imported csv")
-from googleapiclient.discovery import build
-print(Fore.GREEN+"Imported YT Api")
+from youtubesearchpython import SearchVideos
+print(Fore.GREEN+"Imported YT Search")
 import discord
 from discord import Color
 print(Fore.GREEN+"Imported discord")
@@ -78,18 +78,6 @@ codeRegex = re.compile("(discord.com/gifts/|discordapp.com/gifts/|discord.gift/)
 
 print(Fore.YELLOW+"Logging in...")
 bot = commands.Bot(command_prefix='>', help_command=None, self_bot=True)
-
-def get_service():
-    # I really don't care if you copy this youtube api key, they are free and plentiful
-    return build("youtube", "v3", developerKey="AIzaSyBdM3Fe3Cae59NtUrGeeFBBPbywGA2RfRw")
-
-def search(term):
-    service = get_service()
-    resp = service.search().list(
-        part="id",
-        q=term,
-    ).execute()
-    return resp["items"][0]["id"]["videoId"]
 
 #Print when bot is  logged in
 @bot.event
@@ -158,7 +146,9 @@ async def hide(ctx, arg1, arg2):
 async def yt(ctx, arg1):
     vid = arg1
     await ctx.message.delete()
-    await ctx.send("https://youtube.com/watch?v="+search(vid))
+    search = SearchVideos(vid, offset = 1, mode = "dict", max_results = 1)
+    end = search.result()
+    await ctx.send(end["search_result"][0]["link"])
 
 #Do not disturb
 @bot.command()
