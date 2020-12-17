@@ -9,6 +9,7 @@ import colorama
 from colorama import init
 from colorama import Fore, Back, Style
 colorama.init()
+print(Fore.GREEN+"Created by Bigweld Industries | Bigweld.xyz"+Style.RESET_ALL)
 #Import
 print("Importing discord.py and stuff...")
 print("________________________________________________")
