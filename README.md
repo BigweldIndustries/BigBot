@@ -63,6 +63,10 @@ The prefix is ">"
 
 >yt "video name" - Sends the first result for those youtube search terms in chat
 
+>poll color "poll contents" - Sends a poll with reactions set up, in a fancy embed format. Colors are red, orange, yellow, green, blue, purple, black, none
+
+>spam 5 "message" - Spams a message a certain number of times
+
 >wipe - Deletes all channels (Requires confirmation in the console)
 
 >nitro - Sends a random nitro code

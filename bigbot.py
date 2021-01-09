@@ -1,3 +1,34 @@
+import msvcrt
+import ctypes
+import os
+if os.name == 'nt':
+
+    class _CursorInfo(ctypes.Structure):
+        _fields_ = [("size", ctypes.c_int),
+                    ("visible", ctypes.c_byte)]
+
+def hide_cursor():
+    if os.name == 'nt':
+        ci = _CursorInfo()
+        handle = ctypes.windll.kernel32.GetStdHandle(-11)
+        ctypes.windll.kernel32.GetConsoleCursorInfo(handle, ctypes.byref(ci))
+        ci.visible = False
+        ctypes.windll.kernel32.SetConsoleCursorInfo(handle, ctypes.byref(ci))
+    elif os.name == 'posix':
+        sys.stdout.write("\033[?25l")
+        sys.stdout.flush()
+
+def show_cursor():
+    if os.name == 'nt':
+        ci = _CursorInfo()
+        handle = ctypes.windll.kernel32.GetStdHandle(-11)
+        ctypes.windll.kernel32.GetConsoleCursorInfo(handle, ctypes.byref(ci))
+        ci.visible = True
+        ctypes.windll.kernel32.SetConsoleCursorInfo(handle, ctypes.byref(ci))
+    elif os.name == 'posix':
+        sys.stdout.write("\033[?25h")
+        sys.stdout.flush()
+hide_cursor()
 #Logo
 print("██████╗ ██╗ ██████╗ ██████╗  ██████╗ ████████╗")
 print("██╔══██╗██║██╔════╝ ██╔══██╗██╔═══██╗╚══██╔══╝")
@@ -13,8 +44,6 @@ print(Fore.GREEN+"V. 1.3.0\nCreated by Bigweld Industries | Bigweld.xyz"+Style.R
 #Import
 print("Importing discord.py and stuff...")
 print("________________________________________________")
-import os
-print(Fore.RED+"Imported os")
 import sys
 print(Fore.RED+"Imported sys")
 import time
@@ -47,22 +76,31 @@ print(Style.RESET_ALL+"________________________________________________")
 
 #Initializes custom commands
 commanddict = {}
+csvpath = os.path.expandvars(r'%LOCALAPPDATA%\BigBot\commands.csv')
 try:
-    reader = csv.reader(open('commands.csv', 'r'))
-    for row in reader:
-        if row != "":
-            k, v = row
-            commanddict[k] = v
-    print(Fore.GREEN+"Custom commands loaded!"+Style.RESET_ALL)
+    csvthing = open(csvpath, 'w+')
+    reader = csv.reader(csvthing)
+    for row in reader: 
+	    if row != "": 
+		    k, v = row 
+		    commanddict[k] = v
 except:
-    pass
+    os.mkdir(csvpath.rstrip('commands.csv'))
+    open(csvpath, 'x')
+    commanddict["example command"] = "hey! this is a message!"
+    with open(csvpath, 'w') as f:
+        for key in commanddict.keys():
+            f.write("%s,%s\n"%(key,commanddict[key]))
+print(Fore.GREEN+"Custom commands loaded!"+Style.RESET_ALL)
 
 #Login token
+show_cursor()
 TOKEN = input("Please input your user token: ")
+hide_cursor()
 
 
 #Used in hide command
-crazytext = "||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​|||u|​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||"
+crazytext = "||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||||​||"
 
 #If dnd is on
 donotdisturb = False
@@ -85,13 +123,17 @@ bot = commands.Bot(command_prefix='>', help_command=None, self_bot=True)
 async def on_ready():
     print(Fore.GREEN+f'Logged in as {bot.user}!')
     print(Style.RESET_ALL)
+    show_cursor()
     clear = input("Now that you are logged in, should we clear the console so you don't accidentally show your token? (y or n): ")
+    hide_cursor()
     if clear == "y":
         clear = lambda: os.system('cls')
         clear()
         print(Fore.GREEN+f"Console cleared, logged in as {bot.user}")
     else:
         print(Fore.YELLOW+"Console not cleared")
+    print(Fore.GREEN + "Type >help in discord for commands!")
+    print(Fore.RESET)
 
 #Add command
 @bot.command()
@@ -102,39 +144,87 @@ async def add(ctx, arg1, arg2):
     await ctx.message.delete()
     commanddict[arg1] = arg2
     print(Fore.GREEN + f'Command "{name}" added!' + Style.RESET_ALL)
-    with open('commands.csv', 'w') as f:
+    with open(csvpath, 'w') as f:
         for key in commanddict.keys():
             f.write("%s,%s\n"%(key,commanddict[key]))
+
+#Poll command
+@bot.command()
+async def poll(ctx, col, arg2):
+    try:
+        if col == "red":
+            embedcolor = Color.red()
+        if col == "orange":
+            embedcolor = Color.orange()
+        if col == "yellow":
+            embedcolor = Color.yellow()
+        if col == "green":
+            embedcolor = Color.green()
+        if col == "blue":
+            embedcolor = Color.blue()
+        if col == "purple":
+            embedcolor = Color.purple()
+        if col == "black":
+            embedcolor = Color.black()
+        if col == "none":
+            embedcolor = Color.default()
+        embed=discord.Embed(title="POLL:", description=arg2, color=embedcolor)
+        embed.set_footer(text="Vote by reacting")
+        embedmsg = await ctx.send(embed=embed)
+        await ctx.message.delete()
+        await embedmsg.add_reaction("👍")
+        await embedmsg.add_reaction("👎")
+        print(Fore.GREEN+f'Poll {arg2} sent!')
+    except:
+        print(Fore.RED+"Poll failed.")
+    print(Fore.RESET)
+
+#Spam command
+@bot.command()
+async def spam(ctx, arg1, arg2):
+    try:
+        amount = arg1
+        msg = arg2
+        await ctx.message.delete()
+        for _ in range(int(amount)):
+            await ctx.send(msg)
+        print(Fore.GREEN+f'Successfully spammed "{msg}" {amount} times')
+    except:
+        print(Fore.RED+"Spamming failed.")
+    print(Fore.RESET)
 
 #Embed command
 @bot.command()
 async def embed(ctx, col, arg1, arg2, arg3):
-    if col == "red":
-        embedcolor = Color.red()
-    if col == "orange":
-        embedcolor = Color.orange()
-    if col == "yellow":
-        embedcolor = Color.yellow()
-    if col == "green":
-        embedcolor = Color.green()
-    if col == "blue":
-        embedcolor = Color.blue()
-    if col == "purple":
-        embedcolor = Color.purple()
-    if col == "black":
-        embedcolor = Color.black()
-    if col == "none":
-        embedcolor = "none"
-    if embedcolor == "none":
-        embed=discord.Embed(title=arg1, description=arg2)
-        embed.set_footer(text=arg3)
-        await ctx.send(embed=embed)
-        await ctx.message.delete()
-    if embedcolor != "none":
-        embed=discord.Embed(title=arg1, description=arg2, color=embedcolor)
-        embed.set_footer(text=arg3)
-        await ctx.send(embed=embed)
-        await ctx.message.delete()
+    try:
+        if col == "red":
+            embedcolor = Color.red()
+        if col == "orange":
+            embedcolor = Color.orange()
+        if col == "yellow":
+            embedcolor = Color.yellow()
+        if col == "green":
+            embedcolor = Color.green()
+        if col == "blue":
+            embedcolor = Color.blue()
+        if col == "purple":
+            embedcolor = Color.purple()
+        if col == "black":
+            embedcolor = Color.black()
+        if col == "none":
+            embedcolor = "none"
+        if embedcolor == "none":
+            embed=discord.Embed(title=arg1, description=arg2)
+            embed.set_footer(text=arg3)
+            await ctx.send(embed=embed)
+            await ctx.message.delete()
+        if embedcolor != "none":
+            embed=discord.Embed(title=arg1, description=arg2, color=embedcolor)
+            embed.set_footer(text=arg3)
+            await ctx.send(embed=embed)
+            await ctx.message.delete()
+    except:
+        print(Fore.RED+"Failed to send embed.")
 
 #Hide command
 @bot.command()
@@ -218,6 +308,8 @@ async def help(ctx):
     print('>dnd off')
     print('>status dnd')
     print('>yt "video name"')
+    print('>poll color "poll contents"')
+    print('>spam 5 "message"')
     print('>wipe')
     print('>nitro')
     print('>nitrogen "amount"')
@@ -241,12 +333,17 @@ async def coolorcringe(ctx):
 @bot.command()
 async def wipe(ctx):
     await ctx.message.delete()
+    show_cursor()
     wipeinput = input(Fore.RED+"Are you sure you want to destroy every channel in this server? (WARNING: This happens really fast so it will probably flag your account)(y or n): ")
+    hide_cursor()
     if wipeinput == "y" or wipeinput == "Y":
-        guild = ctx.guild
-        for channel in guild.channels:
-            await channel.delete()
-        print(Fore.GREEN+"Wiped")
+        try:
+            guild = ctx.guild
+            for channel in guild.channels:
+                await channel.delete()
+            print(Fore.GREEN+"Wiped")
+        except:
+            print(Fore.RED+"Failed to wipe server.")
 
 #Nitro command
 @bot.command()
@@ -322,6 +419,7 @@ except:
     print(Style.RESET_ALL)
     print("It appears we could not login...")
     print("Make sure your token does not have quotes around it, and you are connected to the internet")
+    show_cursor()
     finalpass = input("Press enter to close...")
     if finalpass=="":
         sys.exit()
