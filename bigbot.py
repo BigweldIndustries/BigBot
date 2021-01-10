@@ -174,7 +174,7 @@ async def poll(ctx, col, arg2):
         await ctx.message.delete()
         await embedmsg.add_reaction("👍")
         await embedmsg.add_reaction("👎")
-        print(Fore.GREEN+f'Poll {arg2} sent!')
+        print(Fore.GREEN+f'Poll "{arg2}" sent!')
     except:
         print(Fore.RED+"Poll failed.")
     print(Fore.RESET)
