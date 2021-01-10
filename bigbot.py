@@ -420,5 +420,4 @@ except:
     print("It appears we could not login...")
     print("Make sure your token does not have quotes around it, and you are connected to the internet")
     finalpass = input("Press enter to close...")
-    if finalpass=="":
-        sys.exit()
+    sys.exit()
