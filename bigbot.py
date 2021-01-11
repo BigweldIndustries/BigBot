@@ -40,7 +40,7 @@ import colorama
 from colorama import init
 from colorama import Fore, Back, Style
 colorama.init()
-print(Fore.GREEN+"V. 1.3.0\nCreated by Bigweld Industries | Bigweld.xyz"+Style.RESET_ALL)
+print(Fore.GREEN+"V. 1.5.0\nCreated by Bigweld Industries | Bigweld.xyz"+Style.RESET_ALL)
 #Import
 print("Importing discord.py and stuff...")
 print("________________________________________________")
