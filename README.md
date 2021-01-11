@@ -42,6 +42,8 @@ To install httpx, get python, install it, and then type in the command prompt "p
 
 To install colorama, get python, install it, and then type in the command prompt "pip install colorama"
 
+there are also like 2 more, but if you're going to bother doing this, you can figure it out
+
 
 # Commands:
 
