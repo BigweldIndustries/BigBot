@@ -1,5 +1,5 @@
 # BigBot
-BigBot is a discord selfbot made using python. It can send invisible pings, autoclaim nitro, send yt videos just from titles and more. Can be set up with no experience nearly instantly 
+BigBot is a discord selfbot made using python. It can send invisible pings, autoclaim nitro, raid servers, send yt videos just from titles and more. Can be set up with no experience nearly instantly 
 
 [![BigBot Demo](https://i.ibb.co/Ttqtvjg/thumbnail-1.jpg)](https://www.youtube.com/watch?v=1XmJ9mzRdSQ)
 
@@ -67,7 +67,13 @@ The prefix is ">"
 
 >spam 5 "message" - Spams a message a certain number of times
 
->wipe - Deletes all channels (Requires confirmation in the console)
+>banall - Bans everyone (You need to own the server)
+
+>massdm "message" - DM's everyone in the server (You must own the server)
+
+>fuck - Deletes all channels and creates 500 new ones super quick. Only channel permissions required
+
+>wipe - Deletes all channels
 
 >nitro - Sends a random nitro code
 

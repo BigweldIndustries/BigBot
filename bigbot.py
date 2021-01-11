@@ -45,31 +45,31 @@ print(Fore.GREEN+"V. 1.3.0\nCreated by Bigweld Industries | Bigweld.xyz"+Style.R
 print("Importing discord.py and stuff...")
 print("________________________________________________")
 import sys
-print(Fore.RED+"Imported sys")
+print(Fore.RED+"[>] Imported sys")
 import time
-print(Fore.RED+"Imported time")
+print(Fore.RED+"[>] Imported time")
 import random
-print(Fore.RED+"Imported random")
+print(Fore.RED+"[>] Imported random")
 import string
-print(Fore.YELLOW+"Imported string")
+print(Fore.YELLOW+"[>] Imported string")
 import re
-print(Fore.YELLOW+"Imported re")
+print(Fore.YELLOW+"[>] Imported re")
 import httpx
-print(Fore.YELLOW+"Imported httpx")
+print(Fore.YELLOW+"[>] Imported httpx")
 import asyncio
-print(Fore.YELLOW+"Imported asyncio")
+print(Fore.YELLOW+"[>] Imported asyncio")
 import json
-print(Fore.GREEN+"Imported json")
+print(Fore.GREEN+"[>] Imported json")
 import csv
-print(Fore.GREEN+"Imported csv")
+print(Fore.GREEN+"[>] Imported csv")
 from youtubesearchpython import SearchVideos
-print(Fore.GREEN+"Imported YT Search")
+print(Fore.GREEN+"[>] Imported YT Search")
 import discord
 from discord import Color
-print(Fore.GREEN+"Imported discord")
+print(Fore.GREEN+"[>] Imported discord")
 from discord.ext import commands
 from discord.ext.commands import Bot
-print(Fore.GREEN+"Imported discord.ext stuff")
+print(Fore.GREEN+"[>] Imported discord.ext stuff")
 print(Style.RESET_ALL+"________________________________________________")
 
 #Set important variables
@@ -91,7 +91,7 @@ except:
     with open(csvpath, 'w') as f:
         for key in commanddict.keys():
             f.write("%s,%s\n"%(key,commanddict[key]))
-print(Fore.GREEN+"Custom commands loaded!"+Style.RESET_ALL)
+print(Fore.GREEN+"[>] Custom commands loaded!"+Style.RESET_ALL)
 
 #Login token
 show_cursor()
@@ -115,13 +115,14 @@ status = "Finished"
 nitrosnipestatus = False
 codeRegex = re.compile("(discord.com/gifts/|discordapp.com/gifts/|discord.gift/)([a-zA-Z0-9]+)")
 
-print(Fore.YELLOW+"Logging in...")
-bot = commands.Bot(command_prefix='>', help_command=None, self_bot=True)
+print(Fore.YELLOW+"[>] Logging in...")
+intents = discord.Intents().all()
+bot = commands.Bot(command_prefix='>', help_command=None, self_bot=True, intents=intents)
 
 #Print when bot is  logged in
 @bot.event
 async def on_ready():
-    print(Fore.GREEN+f'Logged in as {bot.user}!')
+    print(Fore.GREEN+f'[>] Logged in as {bot.user}!')
     print(Style.RESET_ALL)
     show_cursor()
     clear = input("Now that you are logged in, should we clear the console so you don't accidentally show your token? (y or n): ")
@@ -143,7 +144,7 @@ async def add(ctx, arg1, arg2):
     returns = arg2
     await ctx.message.delete()
     commanddict[arg1] = arg2
-    print(Fore.GREEN + f'Command "{name}" added!' + Style.RESET_ALL)
+    print(Fore.GREEN + f'[>] Command "{name}" added!' + Style.RESET_ALL)
     with open(csvpath, 'w') as f:
         for key in commanddict.keys():
             f.write("%s,%s\n"%(key,commanddict[key]))
@@ -174,9 +175,9 @@ async def poll(ctx, col, arg2):
         await ctx.message.delete()
         await embedmsg.add_reaction("👍")
         await embedmsg.add_reaction("👎")
-        print(Fore.GREEN+f'Poll "{arg2}" sent!')
+        print(Fore.GREEN+f'[>] Poll "{arg2}" sent!')
     except:
-        print(Fore.RED+"Poll failed.")
+        print(Fore.RED+"[>] Poll failed")
     print(Fore.RESET)
 
 #Spam command
@@ -188,9 +189,9 @@ async def spam(ctx, arg1, arg2):
         await ctx.message.delete()
         for _ in range(int(amount)):
             await ctx.send(msg)
-        print(Fore.GREEN+f'Successfully spammed "{msg}" {amount} times')
+        print(Fore.GREEN+f'[>] Successfully spammed "{msg}" {amount} times')
     except:
-        print(Fore.RED+"Spamming failed.")
+        print(Fore.RED+"[>] Spamming failed")
     print(Fore.RESET)
 
 #Embed command
@@ -224,7 +225,7 @@ async def embed(ctx, col, arg1, arg2, arg3):
             await ctx.send(embed=embed)
             await ctx.message.delete()
     except:
-        print(Fore.RED+"Failed to send embed.")
+        print(Fore.RED+"[>] Failed to send embed")
 
 #Hide command
 @bot.command()
@@ -310,6 +311,9 @@ async def help(ctx):
     print('>yt "video name"')
     print('>poll color "poll contents"')
     print('>spam 5 "message"')
+    print('>banall')
+    print('>massdm "message"')
+    print('>fuck')
     print('>wipe')
     print('>nitro')
     print('>nitrogen "amount"')
@@ -339,11 +343,78 @@ async def wipe(ctx):
     if wipeinput == "y" or wipeinput == "Y":
         try:
             guild = ctx.guild
+            print(Fore.RED)
             for channel in guild.channels:
                 await channel.delete()
-            print(Fore.GREEN+"Wiped")
+                print(f'[>] Deleted channel "{channel.name}"')
+            print(Fore.GREEN+"[>] Wiped")
         except:
-            print(Fore.RED+"Failed to wipe server.")
+            print(Fore.RED+"[>] Failed to wipe server")
+
+#Fuck command
+@bot.command()
+async def fuck(ctx):
+    await ctx.message.delete()
+    show_cursor()
+    wipeinput = input(Fore.RED+"Are you sure you want to ruin this server? (WARNING: This happens really fast so it will probably flag your account)(y or n): ")
+    hide_cursor()
+    if wipeinput == "y" or wipeinput == "Y":
+        try:
+            guild = ctx.guild
+            print(Fore.RED)
+            for channel in guild.channels:
+                await channel.delete()
+                print(f'[>] Deleted channel "{channel.name}"')
+            print(Fore.GREEN+"[>] Wiped")
+            try:
+                guild = ctx.guild
+                print(Fore.RED)
+                for _ in range(500):
+                    randomtext = ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(3))
+                    tempchannel = await guild.create_text_channel("fuck-"+randomtext)
+                    print(f'[>] Created channel "{tempchannel.name}"')
+                print(Fore.GREEN+"[>] Fucked")
+            except:
+                print(Fore.RED+"[>] Failed to fuck server")
+        except:
+            print(Fore.RED+"[>] Failed to wipe server")
+
+#Ban All Command
+@bot.command()
+async def banall(ctx):
+    await ctx.message.delete()
+    show_cursor()
+    wipeinput = input(Fore.RED+"Are you sure you want to ban all members? (This only works if you own the server)(y or n): ")
+    hide_cursor()
+    if wipeinput == "y" or wipeinput == "Y":
+        for user in ctx.guild.members:
+            try:
+                await user.ban()
+                print(Fore.RED + f'[>] Banned user "{user.name}"')
+            except:
+                print(Fore.YELLOW + f'[>] Failed to ban user "{user.name}"')
+                pass
+        print(Fore.GREEN+"[>] Finished")
+
+#MassDM Command
+@bot.command()
+async def massdm(ctx, msg):
+    await ctx.message.delete()
+    show_cursor()
+    wipeinput = input(Fore.RED+"Are you sure you want to mass dm? (This only works if you own the server)(y or n): ")
+    hide_cursor()
+    if wipeinput == "y" or wipeinput == "Y":
+        for user in ctx.guild.members:
+            if user != bot.user:
+                try:
+                    channel = await user.create_dm()
+                    await channel.send(msg)
+                    print(Fore.GREEN + f'[>] Sent to user "{user.name}"')
+                except:
+                    print(Fore.YELLOW + f'[>] Failed to DM user "{user.name}"')
+                    pass
+        print(Fore.GREEN+"[>] Finished")
+
 
 #Nitro command
 @bot.command()
@@ -360,11 +431,13 @@ async def nitrogen(ctx, arg):
     amount = int(arg)
     await ctx.message.delete()
     nitrocodes = ""
+    print(Fore.YELLOW + f"[>] Generating {arg} nitro codes...")
     for i in range(0,amount):
         code = ''.join(random.choice(string.ascii_uppercase + string.ascii_lowercase + string.digits) for _ in range(16))
         nitrocode = "https://discord.gift/" + code + "\n"
         nitrocodes += nitrocode
         status = "Generating..."
+    print(Fore.GREEN + f"[>] Generated")
     myfile = open("codes.txt","w+")
     myfile.write("CODES: " + "\n")
     myfile.close()
@@ -373,6 +446,7 @@ async def nitrogen(ctx, arg):
     myfile2.close
     endfile=discord.File("codes.txt")
     await ctx.send(file=endfile)
+    print(Fore.GREEN + f"[>] Sent")
     status = "Finished"
     endfile.close()
     f = open('codes.txt', 'r+')
@@ -396,11 +470,11 @@ async def on_message(message):
                 headers={'authorization': TOKEN, 'user-agent': 'Mozilla/5.0'})
                 delay = (time.time() - start_time)
                 if 'This gift has been redeemed already' in str(result.content):
-                    print(Fore.YELLOW+f"We found a code but it was redeemed already ({code}, delay of {delay})")
+                    print(Fore.YELLOW+f"[>] We found a code but it was redeemed already ({code}, delay of {delay})")
                 elif 'nitro' in str(result.content):
-                    print(Fore.GREEN+f"We found a code and claimed it! ({code}, delay of {delay})")
+                    print(Fore.GREEN+f"[>] We found a code and claimed it! ({code}, delay of {delay})")
                 elif 'Unknown Gift Code' in str(result.content):
-                    print(Fore.RED+f"We found a code but it was invalid ({code}, delay of {delay})")
+                    print(Fore.RED+f"[>] We found a code but it was invalid ({code}, delay of {delay})")
     for key in commanddict:
         if message.content == key:
             await message.delete()
