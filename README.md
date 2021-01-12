@@ -6,9 +6,12 @@ BigBot is a discord selfbot made using python. It can send invisible pings, auto
 [Raiding showcase](https://www.youtube.com/watch?v=7LZnb59OzjI)  
 
 # How to download/setup
-Go to [releases](https://github.com/BigweldIndustries/BigBot/releases) and click on the latest one. To get your user token, just look up "get discord token"
+Go to [releases](https://github.com/BigweldIndustries/BigBot/releases) and click on the latest one.
 Typically though, the exe build may be just a bit behind the python file, so scroll down if you are
-experienced enough to mess with that.
+experienced enough to mess with that. To get your user token, look at the catagory below.
+
+# How do I get my token?
+<img src="assets/howtogettoken.gif" width="1000">
 
 # What is this?
 Discord selfbots are kind of like normal discord bots, that
