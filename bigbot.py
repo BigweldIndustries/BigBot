@@ -50,6 +50,8 @@ import time
 print(Fore.RED+"[>] Imported time")
 import random
 print(Fore.RED+"[>] Imported random")
+import pyfiglet
+print(Fore.RED+"[>] Imported pyfiglet")
 import string
 print(Fore.YELLOW+"[>] Imported string")
 import re
@@ -115,8 +117,9 @@ status = "Finished"
 nitrosnipestatus = False
 codeRegex = re.compile("(discord.com/gifts/|discordapp.com/gifts/|discord.gift/)([a-zA-Z0-9]+)")
 
-print(Fore.YELLOW+"[>] Logging in...")
+print(Fore.YELLOW+"[>] Logging in...", end="\r")
 intents = discord.Intents().all()
+intents.members = True
 bot = commands.Bot(command_prefix='>', help_command=None, self_bot=True, intents=intents)
 
 #Print when bot is  logged in
@@ -193,6 +196,17 @@ async def spam(ctx, arg1, arg2):
     except:
         print(Fore.RED+"[>] Spamming failed")
     print(Fore.RESET)
+
+#Ascii command
+@bot.command()
+async def ascii(ctx, arg):
+    await ctx.message.delete()
+    try:
+        text = pyfiglet.figlet_format(arg)
+        await ctx.send(f"```{text}```")
+        print(Fore.GREEN+f'[>] Successfully sent ascii "{arg}"')
+    except:
+        print(Fore.RED+"[>] Ascii failed")
 
 #Embed command
 @bot.command()
@@ -311,10 +325,6 @@ async def help(ctx):
     print('>yt "video name"')
     print('>poll color "poll contents"')
     print('>spam 5 "message"')
-    print('>banall')
-    print('>massdm "message"')
-    print('>fuck')
-    print('>wipe')
     print('>nitro')
     print('>nitrogen "amount"')
     print('>status nitrogen')
@@ -332,89 +342,6 @@ async def coolorcringe(ctx):
     coolorcringelist = ["cool", "cringe"]
     result = random.choice(coolorcringelist)
     await ctx.send(result)
-
-#Wipe command
-@bot.command()
-async def wipe(ctx):
-    await ctx.message.delete()
-    show_cursor()
-    wipeinput = input(Fore.RED+"Are you sure you want to destroy every channel in this server? (WARNING: This happens really fast so it will probably flag your account)(y or n): ")
-    hide_cursor()
-    if wipeinput == "y" or wipeinput == "Y":
-        try:
-            guild = ctx.guild
-            print(Fore.RED)
-            for channel in guild.channels:
-                await channel.delete()
-                print(f'[>] Deleted channel "{channel.name}"')
-            print(Fore.GREEN+"[>] Wiped")
-        except:
-            print(Fore.RED+"[>] Failed to wipe server")
-
-#Fuck command
-@bot.command()
-async def fuck(ctx):
-    await ctx.message.delete()
-    show_cursor()
-    wipeinput = input(Fore.RED+"Are you sure you want to ruin this server? (WARNING: This happens really fast so it will probably flag your account)(y or n): ")
-    hide_cursor()
-    if wipeinput == "y" or wipeinput == "Y":
-        try:
-            guild = ctx.guild
-            print(Fore.RED)
-            for channel in guild.channels:
-                await channel.delete()
-                print(f'[>] Deleted channel "{channel.name}"')
-            print(Fore.GREEN+"[>] Wiped")
-            try:
-                guild = ctx.guild
-                print(Fore.RED)
-                for _ in range(500):
-                    randomtext = ''.join(random.choice(string.ascii_lowercase + string.digits) for _ in range(3))
-                    tempchannel = await guild.create_text_channel("fuck-"+randomtext)
-                    print(f'[>] Created channel "{tempchannel.name}"')
-                print(Fore.GREEN+"[>] Fucked")
-            except:
-                print(Fore.RED+"[>] Failed to fuck server")
-        except:
-            print(Fore.RED+"[>] Failed to wipe server")
-
-#Ban All Command
-@bot.command()
-async def banall(ctx):
-    await ctx.message.delete()
-    show_cursor()
-    wipeinput = input(Fore.RED+"Are you sure you want to ban all members? (This only works if you own the server)(y or n): ")
-    hide_cursor()
-    if wipeinput == "y" or wipeinput == "Y":
-        for user in ctx.guild.members:
-            try:
-                await user.ban()
-                print(Fore.RED + f'[>] Banned user "{user.name}"')
-            except:
-                print(Fore.YELLOW + f'[>] Failed to ban user "{user.name}"')
-                pass
-        print(Fore.GREEN+"[>] Finished")
-
-#MassDM Command
-@bot.command()
-async def massdm(ctx, msg):
-    await ctx.message.delete()
-    show_cursor()
-    wipeinput = input(Fore.RED+"Are you sure you want to mass dm? (This only works if you own the server)(y or n): ")
-    hide_cursor()
-    if wipeinput == "y" or wipeinput == "Y":
-        for user in ctx.guild.members:
-            if user != bot.user:
-                try:
-                    channel = await user.create_dm()
-                    await channel.send(msg)
-                    print(Fore.GREEN + f'[>] Sent to user "{user.name}"')
-                except:
-                    print(Fore.YELLOW + f'[>] Failed to DM user "{user.name}"')
-                    pass
-        print(Fore.GREEN+"[>] Finished")
-
 
 #Nitro command
 @bot.command()
