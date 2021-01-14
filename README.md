@@ -74,13 +74,7 @@ The prefix is ">"
 
 >spam 5 "message" - Spams a message a certain number of times
 
->banall - Bans everyone (You need to own the server)
-
 >massdm "message" - DM's everyone in the server (You must own the server)
-
->fuck - Deletes all channels and creates 500 new ones super quick. Only channel permissions required
-
->wipe - Deletes all channels
 
 >nitro - Sends a random nitro code
 
